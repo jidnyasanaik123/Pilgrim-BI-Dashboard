@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D2C BI Dashboard</title>
+<style>
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#eef3f8;color:#222}
+header{background:linear-gradient(90deg,#0f4c81,#1976d2);color:#fff;padding:24px;text-align:center}
+.container{max-width:1200px;margin:20px auto;padding:0 20px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#fff;border-radius:14px;padding:22px;box-shadow:0 6px 18px rgba(0,0,0,.1);transition:.25s}
+.card:hover{transform:translateY(-5px)}
+.card h3{margin:0;color:#666}.card h2{margin:10px 0 0;color:#0f4c81;font-size:2rem}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-top:20px}
+.panel{background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.1)}
+table{width:100%;border-collapse:collapse}
+th{background:#0f4c81;color:#fff}
+th,td{padding:10px;text-align:center;border-bottom:1px solid #ddd}
+.bar{height:20px;background:#dfe7ef;border-radius:10px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,#0f4c81,#42a5f5)}
+.rank{display:flex;justify-content:space-between;padding:10px;background:#f4f8ff;border-radius:8px;margin:8px 0}
+canvas{width:100%;height:340px}
+ul{line-height:1.8}
+footer{text-align:center;padding:20px;color:#666}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>D2C Skincare & Wellness Business Intelligence Dashboard</h1><p>Internship Assignment</p></header>
+<div class="container">
+<div class="cards">
+<div class="card"><h3>Total Revenue</h3><h2>₹183,356.86</h2></div>
+<div class="card"><h3>Total Orders</h3><h2>52</h2></div>
+<div class="card"><h3>Average Order Value</h3><h2>₹3,526.09</h2></div>
+</div>
+<div class="grid">
+<div>
+<div class="panel">
+<h2>Revenue by Category</h2>
+<canvas id="chart" width="700" height="340"></canvas>
+</div><br>
+<div class="panel">
+<h2>Category Performance</h2>
+<table>
+<tr><th>Category</th><th>Revenue</th><th>Orders</th><th>Avg Order Value</th></tr>
+<tr><td>Haircare</td><td>₹38,013.82</td><td>14</td><td>₹2,715.27</td></tr>
+<tr><td>Makeup</td><td>₹15,283.39</td><td>5</td><td>₹3,056.68</td></tr>
+<tr><td>Skincare</td><td>₹64,722.59</td><td>15</td><td>₹4,314.84</td></tr>
+<tr><td>Wellness</td><td>₹65,337.06</td><td>16</td><td>₹4,083.57</td></tr>
+</table>
+</div>
+</div>
+<div>
+<div class="panel">
+<h2>Channel Discounts</h2>
+<p>Amazon 17.43%</p><div class="bar"><div class="fill" style="width:87%"></div></div><br>
+<p>Instagram 11.36%</p><div class="bar"><div class="fill" style="width:57%"></div></div><br>
+<p>Website 9.25%</p><div class="bar"><div class="fill" style="width:46%"></div></div><br>
+<p>WhatsApp 7.11%</p><div class="bar"><div class="fill" style="width:35%"></div></div><br>
+<p>App 5.53%</p><div class="bar"><div class="fill" style="width:28%"></div></div>
+</div><br>
+<div class="panel">
+<h2>Top Revenue Products</h2>
+<div class="rank"><span>🥇 Vitamin C Serum</span><b>₹30,730.35</b></div>
+<div class="rank"><span>🥈 Collagen Supplement</span><b>₹20,429.18</b></div>
+<div class="rank"><span>🥉 Conditioner</span><b>₹14,298.75</b></div>
+<div class="rank"><span>Ashwagandha</span><b>₹14,100.00</b></div>
+<div class="rank"><span>Night Cream</span><b>₹13,540.80</b></div>
+</div><br>
+<div class="panel">
+<h2>Business Insights</h2>
+<ul>
+<li>Wellness generated the highest revenue.</li>
+<li>Amazon offers the highest average discount.</li>
+<li>Vitamin C Serum is the top revenue-generating product.</li>
+<li>Skincare and Wellness contribute over 70% of total revenue.</li>
+</ul>
+</div>
+</div>
+</div>
+<footer>Standalone HTML Dashboard • No External Libraries</footer>
+</div>
+<script>
+const c=document.getElementById('chart'),x=c.getContext('2d');
+const vals=[38013.82,15283.39,64722.59,65337.06],labs=["Haircare","Makeup","Skincare","Wellness"],cols=["#42a5f5","#66bb6a","#ffa726","#ab47bc"];
+const max=Math.max(...vals);x.strokeStyle="#333";x.beginPath();x.moveTo(60,20);x.lineTo(60,300);x.lineTo(650,300);x.stroke();
+for(let i=0;i<vals.length;i++){let bx=90+i*130,bh=vals[i]/max*220;
+x.fillStyle=cols[i];x.fillRect(bx,300-bh,70,bh);
+x.fillStyle="#222";x.fillText(labs[i],bx-5,320);x.fillText("₹"+Math.round(vals[i]/1000)+"k",bx,290-bh);}
+</script>
+</body></html>
